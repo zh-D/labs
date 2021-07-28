@@ -1,0 +1,24 @@
+{
+  "name": "create-dzh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "bin": {
+    "create-dzh": "lib/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild_ts": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.4.5",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.1",
+    "commander": "^8.1.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.2"
+  }
+}

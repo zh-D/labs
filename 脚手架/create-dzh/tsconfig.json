@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "rootDir": "src",
+    "outDir": "lib",
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "exclude": ["node_modules", "lib"]
+}
