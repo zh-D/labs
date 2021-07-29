@@ -1,11 +1,11 @@
-import * as ora from 'ora';
 import * as inquirer from 'inquirer';
 import * as fs from 'fs-extra';
-import * as path from 'path';
 import checkEmpty from './utils/checkEmpty';
 import selectTemplate from './selectTemplate';
+import downloadAndGenerateProject from './downloadAndGenerateProject';
+
+
 const chalk = require('chalk');
-const downloadGitRepo = require('download-git-repo');
 
 export default async function create(dirPath: string, templateName: string, dirname: string): Promise<void> {
     await fs.ensureDir(dirPath);
@@ -38,43 +38,3 @@ export default async function create(dirPath: string, templateName: string, dirn
 
 }
 
-function downloadAndGenerateProject(
-    dirPath: string,
-    templateUrl: string,
-    dirname: string
-): Promise<void> {
-
-    const spinner = ora('download git repo start').start();
-
-    return new Promise((resolve, reject) => {
-        downloadGitRepo(templateUrl, dirPath, async (err) => {
-            if (err) {
-                spinner.fail('download git repo failed.');
-                console.error(err);
-                process.exit(1);
-            }
-            spinner.succeed('download git repo successfully.');
-            await onDownloadSuccess(dirname);
-            resolve()
-        })
-    })
-}
-
-async function onDownloadSuccess(dirname: string) {
-    // const packagePath = path.join(process.cwd(), dirname, 'package.json')
-    // let packageObj;
-
-    // try {
-    //     packageObj = await fs.readJson(packagePath)
-    //     packageObj.name = dirname;
-    // } catch (err) {
-    //     console.error(err)
-    // }
-
-    // try {
-    //     await fs.writeJson(packagePath, packageObj)
-    //     console.log('writeJson success!')
-    // } catch (err) {
-    //     console.error(err)
-    // }
-}

@@ -1,8 +1,7 @@
 import * as ora from 'ora';
 import * as inquirer from 'inquirer';
-import axios = require('axios');
+import axios from 'axios';
 
-//@ts-ignore
 axios.interceptors.response.use(res => {
     return res.data;
 })
@@ -22,7 +21,6 @@ async function selectRepo(): Promise<string> {
     const spinner = ora('fetch template list start').start();
     let repoList;
     try {
-        //@ts-ignore
         repoList = await axios.get('https://api.github.com/orgs/dzh-cli/repos');
     } catch (error) {
         spinner.fail('fetch template list failed.');
@@ -47,7 +45,6 @@ async function selectTag(repo: string): Promise<string> {
     const spinner = ora('fetch tag list start').start();
     let tags = [];
     try {
-        //@ts-ignore
         tags = await axios.get(`https://api.github.com/repos/dzh-cli/${repo}/tags`);
         if (tags.length === 0) {
             spinner.succeed('fetch tag list successfully.');

@@ -28,8 +28,8 @@ const pkgContent = fs.readJSONSync(path.join(__dirname, '..', 'package.json'));
     program.parse(process.argv);
 
     const dirname: string = program.args[0] ? program.args[0] : '.';
-    //@ts-ignore
-    const templateName: string = program.template ? program.template : program.args[1];
+    const options = program.opts();    
+    const templateName: string = options.template ? options.template : program.args[1];
 
     console.log('create-dzh version:', pkgContent.version);
     console.log('create-dzh args', dirname, templateName);
