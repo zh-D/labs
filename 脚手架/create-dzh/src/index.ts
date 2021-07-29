@@ -20,8 +20,8 @@ const pkgContent = fs.readJSONSync(path.join(__dirname, '..', 'package.json'));
         console.log('');
         console.log('Examples:');
         console.log('  $ create-dzh <projectName> ');
-        console.log('  $ create-dzh <projectName> --template <templateName>');
-        console.log('  $ create-dzh <projectName> <templateName>');
+        console.log('  $ create-dzh <projectName> --template template-simple');
+        console.log('  $ create-dzh <projectName> template-simple');
         process.exit(0);
     })
 
@@ -29,14 +29,13 @@ const pkgContent = fs.readJSONSync(path.join(__dirname, '..', 'package.json'));
 
     const dirname: string = program.args[0] ? program.args[0] : '.';
     //@ts-ignore
-    // const templateUrl: string = program.template ? program.template : program.args[1];
-    const templateUrl = null;
+    const templateName: string = program.template ? program.template : program.args[1];
 
     console.log('create-dzh version:', pkgContent.version);
-    console.log('create-dzh args', dirname, templateUrl);
+    console.log('create-dzh args', dirname, templateName);
 
     const dirPath = path.join(process.cwd(), dirname);
 
-    await create(dirPath, templateUrl, dirname);
+    await create(dirPath, templateName, dirname);
 
 })();

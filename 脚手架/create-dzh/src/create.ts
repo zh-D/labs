@@ -7,7 +7,7 @@ import selectTemplate from './selectTemplate';
 const chalk = require('chalk');
 const downloadGitRepo = require('download-git-repo');
 
-export default async function create(dirPath: string, templateUrl: string, dirname: string): Promise<void> {
+export default async function create(dirPath: string, templateName: string, dirname: string): Promise<void> {
     await fs.ensureDir(dirPath);
     const empty = await checkEmpty(dirPath);
 
@@ -21,14 +21,24 @@ export default async function create(dirPath: string, templateUrl: string, dirna
         });
         if (!go) process.exit(1);
     }
-    if (!templateUrl) {
-        templateUrl = await selectTemplate();
-    }
+
+    const templateUrl = await selectTemplate(templateName);
 
     await downloadAndGenerateProject(dirPath, templateUrl, dirname);
+
+    console.log();
+    console.log('Initialize project successfully.');
+    console.log();
+    console.log('Starts the development server.');
+    console.log();
+    console.log(chalk.cyan(`    cd ${dirname}`));
+    console.log(chalk.cyan('    npm install'));
+    console.log(chalk.cyan('    npm start'));
+    console.log();
+
 }
 
-async function downloadAndGenerateProject(
+function downloadAndGenerateProject(
     dirPath: string,
     templateUrl: string,
     dirname: string
@@ -36,47 +46,35 @@ async function downloadAndGenerateProject(
 
     const spinner = ora('download git repo start').start();
 
-    downloadGitRepo(templateUrl, dirPath, function (err) {
-        if (err) {
-            spinner.fail('download git repo failed.');
-            process.exit(1);
-        }
-
-        spinner.succeed('download git repo successfully.');
-
-        onDownloadSuccess(dirname);
-
-        console.log();
-        console.log('Initialize project successfully.');
-        console.log();
-        console.log('Starts the development server.');
-        console.log();
-        console.log(chalk.cyan(`    cd ${dirname}`));
-        console.log(chalk.cyan('    npm install'));
-        console.log(chalk.cyan('    npm start'));
-        console.log();
+    return new Promise((resolve, reject) => {
+        downloadGitRepo(templateUrl, dirPath, async (err) => {
+            if (err) {
+                spinner.fail('download git repo failed.');
+                console.error(err);
+                process.exit(1);
+            }
+            spinner.succeed('download git repo successfully.');
+            await onDownloadSuccess(dirname);
+            resolve()
+        })
     })
-
-
-
 }
 
-async function onDownloadSuccess(dirname) {
-    const packagePath = path.join(process.cwd(), dirname, 'package.json')
-    let packageObj;
+async function onDownloadSuccess(dirname: string) {
+    // const packagePath = path.join(process.cwd(), dirname, 'package.json')
+    // let packageObj;
 
-    try {
-        packageObj = await fs.readJson(packagePath)
-        packageObj.name = dirname;
-    } catch (err) {
-        console.error(err)
-    }
+    // try {
+    //     packageObj = await fs.readJson(packagePath)
+    //     packageObj.name = dirname;
+    // } catch (err) {
+    //     console.error(err)
+    // }
 
-    try {
-        await fs.writeJson(packagePath, packageObj)
-        console.log('success!')
-    } catch (err) {
-        console.error(err)
-    }
-
+    // try {
+    //     await fs.writeJson(packagePath, packageObj)
+    //     console.log('writeJson success!')
+    // } catch (err) {
+    //     console.error(err)
+    // }
 }

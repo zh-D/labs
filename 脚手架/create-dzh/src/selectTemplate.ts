@@ -5,13 +5,13 @@ import axios = require('axios');
 //@ts-ignore
 axios.interceptors.response.use(res => {
     return res.data;
-  })
-  
+})
+
 
 // select template from github
-export default async function selectTemplate(): Promise<string> {
-    const user = 'zhurong-cli';
-    const repo = await selectRepo();
+export default async function selectTemplate(templateName: string): Promise<string> {
+    const user = 'dzh-cli';
+    const repo = templateName ? templateName : await selectRepo();
     const tag = await selectTag(repo);
     const requestUrl = `${user}/${repo}${tag ? '#' + tag : ''}`;
     return requestUrl;
@@ -23,12 +23,12 @@ async function selectRepo(): Promise<string> {
     let repoList;
     try {
         //@ts-ignore
-        repoList = await axios.get('https://api.github.com/orgs/zhurong-cli/repos');
+        repoList = await axios.get('https://api.github.com/orgs/dzh-cli/repos');
     } catch (error) {
-        spinner.fail('fetch template list start failed.');
+        spinner.fail('fetch template list failed.');
         process.exit(1);
     }
-    spinner.succeed('fetch template list start successfully.');
+    spinner.succeed('fetch template list successfully.');
 
     // 2）用户选择自己新下载的模板名称
     const { repo } = await inquirer.prompt({
@@ -45,18 +45,22 @@ async function selectRepo(): Promise<string> {
 async function selectTag(repo: string): Promise<string> {
     // 远程拉取对应的 tag 列表
     const spinner = ora('fetch tag list start').start();
-    let tags;
+    let tags = [];
     try {
         //@ts-ignore
-        tags = await axios.get(`https://api.github.com/repos/zhurong-cli/${repo}/tags`);
+        tags = await axios.get(`https://api.github.com/repos/dzh-cli/${repo}/tags`);
+        if (tags.length === 0) {
+            spinner.succeed('fetch tag list successfully.');
+            return
+        }
     } catch (error) {
         if (error) {
-            spinner.fail('fetch tag list start Failed.');
+            spinner.fail('fetch tag list Failed.');
             process.exit(1);
         }
     }
 
-    spinner.succeed('fetch tag list start successfully.');
+    spinner.succeed('fetch tag list successfully.');
 
     const { tag } = await inquirer.prompt({
         name: 'tag',
