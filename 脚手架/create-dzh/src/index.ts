@@ -34,8 +34,5 @@ const pkgContent = fs.readJSONSync(path.join(__dirname, '..', 'package.json'));
     console.log('create-dzh version:', pkgContent.version);
     console.log('create-dzh args', dirname, templateName);
 
-    const dirPath = path.join(process.cwd(), dirname);
-
-    await create(dirPath, templateName, dirname);
-
+    await create(dirname, templateName);
 })();

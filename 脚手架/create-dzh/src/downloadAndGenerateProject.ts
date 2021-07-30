@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as ora from 'ora';
 import * as fs from 'fs-extra';
 const shell = require('shelljs');
@@ -5,15 +6,14 @@ const downloadGitRepo = require('download-git-repo');
 const execSync = require('child_process').execSync;
 
 export default function downloadAndGenerateProject(
-    dirPath: string,
-    templateUrl: string,
-    dirname: string
+    dirname: string,
+    templateUrl: string
 ): Promise<void> {
 
     const spinner = ora('download git repo start').start();
 
     return new Promise((resolve, reject) => {
-        downloadGitRepo(templateUrl, dirPath, async (err) => {
+        downloadGitRepo(templateUrl, path.join(process.cwd(), dirname), async (err) => {
             if (err) {
                 spinner.fail('download git repo failed.');
                 console.error(err);
@@ -26,7 +26,7 @@ export default function downloadAndGenerateProject(
     })
 }
 
-async function onDownloadSuccess(dirname: string) {
+function onDownloadSuccess(dirname: string) {
     // 进入生成的项目目录
     shell.cd(dirname);
     // 修改 package.json 的 name 字段
@@ -35,7 +35,6 @@ async function onDownloadSuccess(dirname: string) {
     tryGitInit();
     // git commit
     tryGitCommit();
-
 }
 
 function modifyPackageJson(dirname: string) {
