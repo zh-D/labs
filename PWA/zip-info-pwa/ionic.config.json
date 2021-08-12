@@ -1,0 +1,7 @@
+{
+  "name": "zip-info-pwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

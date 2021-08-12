@@ -1,0 +1,50 @@
+{
+  "name": "zip-info-pwa",
+  "version": "0.0.1",
+  "private": true,
+  "description": "An Ionic project",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@capacitor/app": "1.0.2",
+    "@capacitor/camera": "^1.0.3",
+    "@capacitor/core": "2.4.9",
+    "@capacitor/filesystem": "^1.0.2",
+    "@capacitor/haptics": "1.0.2",
+    "@capacitor/keyboard": "1.0.2",
+    "@capacitor/status-bar": "1.0.2",
+    "@capacitor/storage": "^1.0.3",
+    "@ionic/vue": "^5.4.0",
+    "@ionic/vue-router": "^5.4.0",
+    "core-js": "^3.6.5",
+    "register-service-worker": "^1.7.1",
+    "vue": "^3.2.1",
+    "vue-router": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "2.4.9",
+    "@types/jest": "^24.0.19",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "^4.5.13",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0-0",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "@vue/test-utils": "^2.0.0-0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "typescript": "^4.3.5",
+    "vue-jest": "^5.0.0-0"
+  }
+}
