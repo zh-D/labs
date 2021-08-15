@@ -1,0 +1,1 @@
+use `@testing-library/react` & `react-test-renderer` to test react project
