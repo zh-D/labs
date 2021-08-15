@@ -1,0 +1,1 @@
+`npm test -- coverage` to generate coverage
