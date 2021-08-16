@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style media="screen">
+
+    </style>
+</head>
+
+<body>
+    <h2 id="titel">Local Storage</h2>
+    <fieldset>
+        <legend>Insert Data</legend>
+        <input type="text" name="" id="inputKey" placeholder="Enter Key...">
+        <input type="text" name="" id="inputValue" placeholder="Enter Value...">
+        <button type="button" id="btnInsert">Insert Data</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>localStorage</legend>
+        <div id="isOutput"></div>
+    </fieldset>
+</body>
+
+<script>
+    // localStorage.setItem("name", "javascript")
+    // localStorage.removeItem("name")
+    // console.log(localStorage.getItem("name"))
+    // console.log(localStorage.key("javascript"));
+    // localStorage.clear()
+    const inputKey = document.getElementById("inputKey")
+    const inputValue = document.getElementById("inputValue")
+    const btnInsert = document.getElementById("btnInsert")
+    const isOutput = document.getElementById("isOutput")
+
+    btnInsert.onclick = function () {
+        const key = inputKey.value
+        const value = inputValue.value
+
+        if (key && value) {
+            localStorage.setItem(key, value)
+            location.reload()
+        }
+
+    }
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i)
+        const value = localStorage.getItem(key)
+
+        isOutput.innerHTML += `${key}: ${value} <br />`
+    }
+
+</script>
+
+</html>
