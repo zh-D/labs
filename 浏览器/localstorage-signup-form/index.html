@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM DATA</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>SIGNUP FORM</h2>
+        <form role="form" onsubmit="signUp(event)">
+            <div class="form-group">
+                <input type="text" name="fname" id="fname" placeholder="First Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="lname" id="lname" placeholder="Last Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="email" id="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="pwd" id="pwd" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Sign Up</button>
+            </div>
+
+            <h2>MY INOF</h2>
+            <table>
+                <thead>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Address</th>
+                    <th>PassWord</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        const signUp = e => {
+
+            let formData = JSON.parse(localStorage.getItem("formData")) || []
+            let exist = formData.length && JSON.parse(localStorage.getItem("formData")).some(data => data.lname.toLowerCase() == document.getElementById("lname").value.toLowerCase())
+            if (!exist) {
+                formData.push({
+                    fname: document.getElementById("fname").value,
+                    lname: document.getElementById("lname").value,
+                    email: document.getElementById("email").value,
+                    pwd: document.getElementById("pwd").value
+                })
+
+                localStorage.setItem("formData", JSON.stringify(formData))
+                console.log(localStorage.getItem("formData"));
+                document.querySelector('form').reset()
+                document.getElementById("fname").focus()
+            } else {
+                alert("duplicate found\n you have already signed up")
+            }
+
+            e.preventDefault()
+            dispData()
+
+        }
+
+        function dispData() {
+            if (localStorage.getItem("formData")) {
+                // console.log(JSON.parse(localStorage.getItem("formData")));
+                console.log(123);
+                let output = document.querySelector("tbody")
+                console.log(output);
+                output.innerHTML = ""
+                JSON.parse(localStorage.getItem("formData")).map(data => {
+                    output.innerHTML += `
+                                        <tr>
+                                            <td>${data.fname}</td>
+                                            <td>${data.lname}</td>
+                                            <td>${data.email}</td>
+                                            <td>${data.pwd}</td>
+                                        </tr>`
+                })
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

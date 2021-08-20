@@ -1,0 +1,1 @@
+使用 localStorage 判断是否用户已经注册
