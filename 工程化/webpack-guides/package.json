@@ -8,7 +8,15 @@
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "csv-loader": "^3.0.3",
+    "json5": "^2.2.0",
+    "style-loader": "^3.2.1",
+    "toml": "^3.0.0",
+    "xml-loader": "^1.2.1",
+    "yamljs": "^0.3.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
