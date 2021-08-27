@@ -10,6 +10,7 @@ function component() {
     btn.onclick = printMe;
 
     element.appendChild(btn);
+    console.log(123);
 
     return element;
 }
