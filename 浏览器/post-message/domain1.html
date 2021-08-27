@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain1</title>
+</head>
+
+<body>
+    <script>
+        window.addEventListener("message", function (message) {
+            if (message.origin == "http://www.domain2.com") {
+                alert(message.data)
+            }
+            if (message.origin.indexOf("www.domain2.com") > 0) {
+                alert(message.data)
+            }
+        })
+    </script>
+</body>
+
+</html>
