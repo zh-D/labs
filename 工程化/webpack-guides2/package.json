@@ -1,0 +1,16 @@
+{
+  "name": "webpack-guides2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/webpack-numbers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lodash": "^4.17.21",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
